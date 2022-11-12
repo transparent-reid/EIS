@@ -28,16 +28,13 @@ public class Decoding {
         String disasterIndi = disaster.substring(3);
         String disasterParent = disaster.substring(0,1);
         String disasterChildren = disaster.substring(1,3);
+
         switch (disasterParent){
             case "1":
                 disasterInfo = disasterInfo.concat("震情-");
-                switch (disasterChildren){
-                    case "01":
-                        disasterInfo = disasterInfo.concat("震情信息");
-                        break;
-                    default:
-                        System.out.println("灾情码错误");
-                }
+                if(disasterChildren.equals("01")) disasterInfo = disasterInfo.concat("震情信息");
+                else System.out.println("灾情码错误");
+
                 switch (disasterIndi){
                     case "001":
                         disasterIndiInfo = disasterIndiInfo.concat("地理位置");break;
@@ -57,14 +54,11 @@ public class Decoding {
                 disasterInfo = disasterInfo.concat("人员伤亡及失踪-");
                 switch (disasterChildren){
                     case "01":
-                        disasterInfo = disasterInfo.concat("死亡");
-                        break;
+                        disasterInfo = disasterInfo.concat("死亡");break;
                     case "02":
-                        disasterInfo = disasterInfo.concat("受伤");
-                        break;
+                        disasterInfo = disasterInfo.concat("受伤");break;
                     case "03":
-                        disasterInfo = disasterInfo.concat("失踪");
-                        break;
+                        disasterInfo = disasterInfo.concat("失踪");break;
                     default:
                         System.out.println("灾情码错误");
                 }
@@ -171,7 +165,6 @@ public class Decoding {
         }
 
 
-
         switch (origin){
             case "100":
                 textInfo.put("origin","前方地震应急指挥部");break;
@@ -210,6 +203,7 @@ public class Decoding {
             default:
                 System.out.println("来源码错误");
         }
+
 
         switch (type){
             case "0":
