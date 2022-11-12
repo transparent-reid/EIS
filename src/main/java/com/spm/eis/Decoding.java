@@ -228,9 +228,8 @@ public class Decoding {
         System.out.println("灾情信息: "+textInfo.get("disaster"));
         System.out.println("灾情指标: "+textInfo.get("disasterIndi"));
     }
-    public static void main(String[] args) {
-        String u = "";
-        Decoding a = new Decoding();
-        a.decoding(u);
+
+    public HashMap<String, String> getTextInfo(){
+        return textInfo;
     }
 }
