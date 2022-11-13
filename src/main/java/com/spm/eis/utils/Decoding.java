@@ -3,10 +3,13 @@ package com.spm.eis.utils;
 import com.spm.eis.data.AddressCode;
 import com.spm.eis.mapper.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.HashMap;
 
+@Component
 public class Decoding {
     private String code;
     private HashMap<String, String> textInfo;
@@ -14,6 +17,12 @@ public class Decoding {
     @Autowired
     private AddressMapper addressMapper;
 
+    private static Decoding decode;
+    @PostConstruct
+    public void init(){
+        decode = this;
+        decode.addressMapper = this.addressMapper;
+    }
 
     public void decoding(String code){
         this.code = code;
@@ -34,6 +43,7 @@ public class Decoding {
 
 
         String addressInfo = "";
+
         AddressCode addressCode = addressMapper.selectById(Long.parseLong(address));
         addressInfo = addressInfo.concat(addressCode.getName());
         while(addressCode.getPcode()!=0){
