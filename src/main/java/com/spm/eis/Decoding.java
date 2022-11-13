@@ -1,7 +1,5 @@
 package com.spm.eis;
 
-import org.springframework.boot.SpringApplication;
-
 import java.util.HashMap;
 
 public class Decoding {
@@ -9,19 +7,27 @@ public class Decoding {
     private HashMap<String, String> textInfo;
 
     public void decoding(String code){
-        this.code=code;
+        this.code = code;
         code = "632626200206202105220204001010302001";
         textInfo = new HashMap<>();
-        textInfo.put("earthquake",null);
+        textInfo.put("location",null);
+        textInfo.put("date",null);
         textInfo.put("origin", null);
         textInfo.put("type",null);
         textInfo.put("disaster",null);
         textInfo.put("disasterIndi",null);
 
-        String earthquake = code.substring(0,26);
+        String location = code.substring(0,12);
+        String date = code.substring(12,26);
         String origin = code.substring(26,29);
         String type = code.substring(29,30);
         String disaster = code.substring(30);
+
+
+
+        String dateInfo = date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8)
+                +" "+date.substring(8,10)+":"+date.substring(10,12)+":"+date.substring(12);
+        textInfo.put("date",dateInfo);
 
         String disasterInfo = "";
         String disasterIndiInfo = "";
@@ -222,7 +228,8 @@ public class Decoding {
 
         textInfo.put("disaster",disasterInfo);
         textInfo.put("disasterIndi",disasterIndiInfo);
-        System.out.println(earthquake+" "+origin+" "+type+" "+disaster);
+        System.out.println(location+" "+date+" "+origin+" "+type+" "+disaster);
+        System.out.println("日期:    "+textInfo.get("date"));
         System.out.println("来源:    "+textInfo.get("origin"));
         System.out.println("载体:    "+textInfo.get("type"));
         System.out.println("灾情信息: "+textInfo.get("disaster"));
