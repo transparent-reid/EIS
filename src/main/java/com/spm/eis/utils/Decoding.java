@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.Serializable;
 import java.util.HashMap;
 
 @Component
 public class Decoding {
-    private String code;
+
     private HashMap<String, String> textInfo;
 
     @Autowired
@@ -25,8 +24,9 @@ public class Decoding {
     }
 
     public void decoding(String code){
-        this.code = code;
-        code = "632626200206202105220204001010302001";
+
+//        code = "632626200206202105220204001010302001";
+
         textInfo = new HashMap<>();
         textInfo.put("address",null);
         textInfo.put("date",null);
@@ -45,17 +45,17 @@ public class Decoding {
         String addressInfo = "";
 
         AddressCode addressCode = decode.addressMapper.selectById(Long.parseLong(address));
-        addressInfo = addressInfo.concat(addressCode.getName());
+        addressInfo = addressCode.getName().concat(addressInfo);
         while(addressCode.getPcode()!=0){
             addressCode = decode.addressMapper.selectById(addressCode.getPcode());
-            addressInfo = addressInfo.concat(addressCode.getName());
+            addressInfo = addressCode.getName().concat(addressInfo);
         }
-        textInfo.put("address",addressInfo);
+
 
 
         String dateInfo = date.substring(0,4)+"-"+date.substring(4,6)+"-"+date.substring(6,8)
                 +" "+date.substring(8,10)+":"+date.substring(10,12)+":"+date.substring(12);
-        textInfo.put("date",dateInfo);
+
 
         String disasterInfo = "";
         String disasterIndiInfo = "";
@@ -254,6 +254,8 @@ public class Decoding {
                 System.out.println("载体码错误");
         }
 
+        textInfo.put("address",addressInfo);
+        textInfo.put("date",dateInfo);
         textInfo.put("disaster",disasterInfo);
         textInfo.put("disasterIndi",disasterIndiInfo);
     }
