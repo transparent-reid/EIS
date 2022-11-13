@@ -1,19 +1,34 @@
 package com.spm.eis.controller;
 
-import com.spm.eis.Decoding;
+import com.spm.eis.utils.Decoding;
+import com.spm.eis.data.CodeInfo;
+import com.spm.eis.mapper.CodeInfoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
-@RestController("/data")
+@RestController
+@RequestMapping("/data")
 public class DataController {
-    Decoding decoding = new Decoding();
 
-    @GetMapping("/{code}")
-    public HashMap<String, String> getData(@PathVariable("code") String code) {
-        decoding.decoding(code);
-        return decoding.getTextInfo();
+    @Autowired(required = false)
+    private CodeInfoMapper codeInfoMapper;
+
+    @GetMapping("/all")
+    public List<HashMap<String, String>> getAllData() {
+        List<CodeInfo> codeInfos = codeInfoMapper.selectList(null);
+        List<HashMap<String, String>> output = new LinkedList<>();
+        System.out.println(codeInfos);
+        for(CodeInfo info: codeInfos){
+            Decoding decoding = new Decoding();
+            decoding.decoding(info.getCode());
+            output.add(decoding.getTextInfo());
+        }
+        return output;
     }
 }
