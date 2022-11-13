@@ -25,7 +25,6 @@ public class DataController {
     public List<HashMap<String, String>> getAllData() {
         List<CodeInfo> codeInfos = codeInfoMapper.selectList(null);
         List<HashMap<String, String>> output = new LinkedList<>();
-        System.out.println(codeInfos);
         for(CodeInfo info: codeInfos){
             Decoding decoding = new Decoding();
             decoding.decoding(info.getCode());
