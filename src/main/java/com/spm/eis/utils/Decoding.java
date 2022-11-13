@@ -1,4 +1,4 @@
-package com.spm.eis;
+package com.spm.eis.utils;
 
 import org.springframework.boot.SpringApplication;
 
