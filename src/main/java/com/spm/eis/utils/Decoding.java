@@ -256,12 +256,6 @@ public class Decoding {
 
         textInfo.put("disaster",disasterInfo);
         textInfo.put("disasterIndi",disasterIndiInfo);
-        System.out.println(address+" "+date+" "+origin+" "+type+" "+disaster);
-        System.out.println("日期:    "+textInfo.get("date"));
-        System.out.println("来源:    "+textInfo.get("origin"));
-        System.out.println("载体:    "+textInfo.get("type"));
-        System.out.println("灾情信息: "+textInfo.get("disaster"));
-        System.out.println("灾情指标: "+textInfo.get("disasterIndi"));
     }
 
     public HashMap<String, String> getTextInfo(){

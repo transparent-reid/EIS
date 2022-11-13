@@ -5,11 +5,14 @@ import com.spm.eis.mapper.CodeInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 import java.util.Random;
 
 @RestController
 @RequestMapping("/upload")
+@CrossOrigin
 public class UploadController {
 
     private CodeInfo codeInfo = new CodeInfo();
@@ -18,10 +21,10 @@ public class UploadController {
     private CodeInfoMapper codeInfoMapper;
 
     @PostMapping("/code")
-    public void uploadCode(@RequestParam("code") String code, HttpServletResponse response){
+    public String uploadCode(@RequestParam Map<String, String> params){
         codeInfo.setId(new Random().nextLong());
-        codeInfo.setCode(code);
+        codeInfo.setCode(params.get("code"));
         codeInfoMapper.insert(codeInfo);
-        response.setStatus(200);
+        return "upload success";
     }
 }

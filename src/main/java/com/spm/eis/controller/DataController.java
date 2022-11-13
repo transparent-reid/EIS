@@ -4,6 +4,7 @@ import com.spm.eis.utils.Decoding;
 import com.spm.eis.data.CodeInfo;
 import com.spm.eis.mapper.CodeInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/data")
+@CrossOrigin
 public class DataController {
 
     @Autowired(required = false)
