@@ -44,10 +44,10 @@ public class Decoding {
 
         String addressInfo = "";
 
-        AddressCode addressCode = addressMapper.selectById(Long.parseLong(address));
+        AddressCode addressCode = decode.addressMapper.selectById(Long.parseLong(address));
         addressInfo = addressInfo.concat(addressCode.getName());
         while(addressCode.getPcode()!=0){
-            addressCode = addressMapper.selectById(addressCode.getPcode());
+            addressCode = decode.addressMapper.selectById(addressCode.getPcode());
             addressInfo = addressInfo.concat(addressCode.getName());
         }
         textInfo.put("address",addressInfo);
