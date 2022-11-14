@@ -5,3 +5,7 @@ spring:
     url: jdbc:mysql://localhost:3306/eis
     username: root
     password: muguohong666
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

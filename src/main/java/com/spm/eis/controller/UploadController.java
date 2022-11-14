@@ -3,10 +3,9 @@ package com.spm.eis.controller;
 import com.spm.eis.data.CodeInfo;
 import com.spm.eis.mapper.CodeInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,10 +19,10 @@ public class UploadController {
     @Autowired(required = false)
     private CodeInfoMapper codeInfoMapper;
 
-    @PostMapping("/code")
-    public String uploadCode(@RequestParam Map<String, String> params){
+    @PostMapping(value = "/code", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String uploadCode(@RequestBody Map<String, Object> params){
         codeInfo.setId(new Random().nextLong());
-        codeInfo.setCode(params.get("code"));
+        codeInfo.setCode((String) params.get("code"));
         codeInfoMapper.insert(codeInfo);
         return "upload success";
     }
