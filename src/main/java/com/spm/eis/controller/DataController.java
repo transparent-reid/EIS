@@ -21,7 +21,7 @@ public class DataController {
     @Autowired(required = false)
     private CodeInfoMapper codeInfoMapper;
 
-    @GetMapping("/all/decode")
+    @GetMapping("/all")
     public List<HashMap<String, String>> getAllData() {
         List<CodeInfo> codeInfos = codeInfoMapper.selectList(null);
         List<HashMap<String, String>> output = new LinkedList<>();
