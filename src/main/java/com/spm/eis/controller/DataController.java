@@ -29,12 +29,8 @@ public class DataController {
             Decoding decoding = new Decoding();
             decoding.decoding(info.getCode());
             HashMap<String, String> cell = new HashMap<>(decoding.getTextInfo());
-            if(info.getText() != null) {
-                cell.put("text", info.getText());
-            }
-            else {
-                cell.put("text", null);
-            }
+            cell.put("text", info.getText());
+            cell.put("media", info.getFilePath());
             output.add(cell);
         }
         return output;
