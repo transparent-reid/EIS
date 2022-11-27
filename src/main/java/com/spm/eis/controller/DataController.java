@@ -21,14 +21,21 @@ public class DataController {
     @Autowired(required = false)
     private CodeInfoMapper codeInfoMapper;
 
-    @GetMapping("/all")
+    @GetMapping("/all/decode")
     public List<HashMap<String, String>> getAllData() {
         List<CodeInfo> codeInfos = codeInfoMapper.selectList(null);
         List<HashMap<String, String>> output = new LinkedList<>();
         for(CodeInfo info: codeInfos){
             Decoding decoding = new Decoding();
             decoding.decoding(info.getCode());
-            output.add(decoding.getTextInfo());
+            HashMap<String, String> cell = new HashMap<>(decoding.getTextInfo());
+            if(info.getText() != null) {
+                cell.put("text", info.getText());
+            }
+            else {
+                cell.put("text", null);
+            }
+            output.add(cell);
         }
         return output;
     }

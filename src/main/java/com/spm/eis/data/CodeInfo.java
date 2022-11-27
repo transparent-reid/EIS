@@ -9,4 +9,5 @@ public class CodeInfo {
     private Long id;
     private String code;
     private String filePath;
+    private String text;
 }
